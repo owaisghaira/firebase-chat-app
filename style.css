@@ -1,0 +1,59 @@
+.wrapper {
+  width: 350px;
+  height: 500px;
+  background-color: antiquewhite;
+  margin: auto;
+  margin-top: 80px;
+  border-radius: 20px;
+  /* position: relative; */
+}
+.head {
+  text-align: center;
+  background-color: burlywood;
+  border-radius: 20px 20px 0px 0px;
+}
+.chat {
+  height: 389px;
+  width: 350px;
+}
+.inp {
+  width: 73%;
+  height: 40px;
+  border-style: none;
+  background-color: rgb(231, 222, 204);
+  border-radius: 0px 0px 20px 20px;
+  padding-left: 10px;
+}
+.btn {
+  border-style: none;
+  height: 35px;
+  width: 20%;
+  border-radius: 20px;
+}
+.message {
+  background-color: rgb(231, 222, 204);
+  border-radius: 0px 0px 20px 20px;
+}
+.right {
+  list-style: none;
+  /* background-color: rgb(231, 222, 204); */
+  text-align: right;
+  padding: 25px;
+}
+.left {
+  list-style: none;
+  text-align: left;
+  /* background-color: rgb(231, 222, 204); */
+  padding: 5px;
+}
+
+.hello {
+  background-color: #0bceaf;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 5px 20px;
+  border-radius: 20px 20px 0px 20px;
+}
+ul li {
+  padding: 10px;
+}

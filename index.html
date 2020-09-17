@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAT-APP</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+          apiKey: "AIzaSyAAaLXlD6r1Ow9MLUr6Sek2qbfepBueyVc",
+          authDomain: "chat-app-6b107.firebaseapp.com",
+          databaseURL: "https://chat-app-6b107.firebaseio.com",
+          projectId: "chat-app-6b107",
+          storageBucket: "chat-app-6b107.appspot.com",
+          messagingSenderId: "690301948656",
+          appId: "1:690301948656:web:ec8d6a9e7b0ddc7cf52835",
+          measurementId: "G-T0PSLGX8QR"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        // firebase.analytics();
+      </script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="head">
+            <h1>Chat App</h1>
+        </div>
+        <div id="" class="chat">
+            <ul id="render">
+                <!-- <li class="left"> <span class="hello"> hello</span> </li>
+                <li class="right"> <span class="hello ">fine and you</span> </li> -->
+                
+                <!-- <li  class="right">fine</li>
+
+                <li class="left">me thek tum kaha ho</li>
+
+                <li  class="right">kese ho bhai</li> -->
+            </ul>
+
+        </div>
+        <div class="message">
+            <p>
+                <input id="msg" class="inp" type="text" placeholder="type a message">
+                <button onclick="show()" class="btn"><img width="20px" height="15px"
+                        src="https://cdn.iconscout.com/icon/premium/png-512-thumb/send-message-6-663814.png"
+                        alt="send"></button>
+            </p>
+
+        </div>
+
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
