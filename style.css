@@ -14,9 +14,7 @@
 .chat {
   height: 389px;
   width: 350px;
-  /* padding: 0px;
   margin: 0px;
-  border:2px */
 }
 .inp {
   width: 73%;
@@ -37,12 +35,12 @@
   border-radius: 0px 0px 20px 20px;
 }
 .right {
-  list-style: none;
+  /* list-style: none; */
   text-align: right;
   padding: 5px;
 }
 .left {
-  list-style: none;
+  /* list-style: none; */
   text-align: left;
   padding: 5px;
 }
@@ -50,10 +48,15 @@
 .hello {
   background-color: #0bceaf;
   font-size: 18px;
-  line-height: 24px;
+  line-height: 20px;
   padding: 5px 20px;
   border-radius: 20px 20px 20px 20px;
 }
 ul li {
   padding: 10px;
+  margin: 0%;
 }
+/* .content{
+  list-style-;
+
+} */

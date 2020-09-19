@@ -15,24 +15,46 @@
 
 // }
 
-var user;
-let username = ()=>{
-var inner1 = document.getElementById("username1").value
-var inner2 = document.getElementById("username2").value
-// console.log(inner2)
-if (inner1 != ""){
-    user = 'user1'
-}
-else if(inner1 == ""){
-    user = 'user2'
-}
-else{
-    alert("enter name plz")
-}
-console.log(user)
+// #sign in thorough input box // 
+// var user;
+// let username = ()=>{
+// var inner1 = document.getElementById("username1").value
+// var inner2 = document.getElementById("username2").value
+// // console.log(inner2)
+// if (inner1 != ""){
+//     user = 'user1'
+// }
+// else if(inner1 == ""){
+//     user = 'user2'
+// }
+// else{
+//     alert("enter name plz")
+// }
+// console.log(user)
+
+// }
+const fbLogin = ()=>{
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+    .then(function(result) {
+        var token = result.credential.accessToken;
+        var user = result.user;
+        console.log("user==>",user.displayName)
+        // ...
+      }).catch(function(error) {
+       console.log("error==>",error.message)
+      });
 
 }
-
+const fbOut = ()=>{
+    firebase.auth().signOut()
+    .then(function() {
+        alert('Sign-out successful.')
+      }).catch(function(error) {
+        
+      });
+}
+var userdata = 'user2'
 firebase.database().ref("sms").on('child_added', function (data) {
     // console.log(data.val().value)
     var cheekUser = data.val().user
@@ -67,7 +89,7 @@ let show = () => {
     var key = firebase.database().ref().push().key
     var msg = {
         key: key,
-        user: user,
+        user: userdata,
         value: item.value
     }
     firebase.database().ref('sms').child(key).set(msg)
