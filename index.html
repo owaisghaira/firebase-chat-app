@@ -7,6 +7,7 @@
     <title>CHAT-APP</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-database.js"></script>
@@ -32,53 +33,89 @@
 </head>
 
 <body>
-    <!-- <div class="wrapper">
-        <div class="head">
-            <h1>Chat App</h1>
-        </div>
-        <div id="" class="chat">
-            <!-- <ul>
-                <li> <input  id="username1" type="text" placeholder="name1"> </li>
-                <li > <input id="username2" type="text" placeholder="name2"> </li>
-                <button onclick="username()">start</button>
-            <!-- </ul> -->
-            <!-- <button onclick="fbLogin()">login fb</button> -->
-            <!-- <button onclick="fbOut()">Signout</button> -->
-            <!-- <ul class="content" id="render"> --> -->
-                <!-- <li class="left"> <span class="hello"> hello</span> </li>
-                <li class="right"> <span class="hello ">fine and you</span> </li> -->
-                
-                <!-- <li  class="right">fine</li>
+    <div class="container bg-white chatbox rounded">
+        <div class="row h-100">
+            <div class="col-md-4 px-0 d-none d-md-block" id="side-1" >
+                <div class="card h-100">
+                    <div class="card-header">
+                        <div class="row ">
+                            <div class="col-md-10 col-10">
+                                <img class="profile-pic rounded-circle" src="images/profile.png" alt="">
+                            </div>
+                            <div class="col-md-2 col-2">
+                                <i class="fa fa-chevron-left mt-3 d-md-none " style="cursor: pointer;" onclick="hideFlist()" aria-hidden="true"></i>
 
-                <li class="left">me thek tum kaha ho</li>
-
-                <li  class="right">kese ho bhai</li> -->
-            <!-- </ul>
-
-        </div>
-        <div class="message">
-            <p>
-                <input id="msg" class="inp" type="text" placeholder="type a message">
-                <button onclick="show()" class="btn"><img width="20px" height="15px"
-                        src="https://cdn.iconscout.com/icon/premium/png-512-thumb/send-message-6-663814.png"
-                        alt="send"></button>
-            </p>
-
-        </div>
-
-    </div> --> 
-    <div class="background">
-        <div class="container-fluid">
-            <div class="card wrapper ">
-                <div class="card-header">
-                    <h1>Chat App</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item list-group-item-action" onclick="startChat(1)">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="images/profile.png" class="profile-pic rounded-circle" alt="">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="name">Any name</div>
+                                    <div class="under-name">this is some text</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item list-group-item-action">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img src="images/profile.png" class="profile-pic rounded-circle" alt="">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="name">Any name</div>
+                                    <div class="under-name">this is some text</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-
             </div>
+            <div class="col-md-8 col-12 pl-0 px-0 " id="side-2">
+                <div class="card h-100" style="display: none;" id="start">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-1 col-1 d-md-none mt-2">
+                                <i class="fa fa-list" aria-hidden="true" onclick="showFlist()" style="cursor: pointer;" ></i>
+                            </div>
+                            <div class="col-md-2 col-2">
+                                <img class="profile-pic" src="images/profile.png" alt="">
+                            </div>
+                            <div class="col-md-9 col-9">
+                                <div class="name">Any name</div>
+                                <div class="under-name">2/4/2020 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body"></div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-1 col-1">
+                                <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-md-10 col-10">
+                                <input type="text" placeholder="type here..." class="form-control form-rounded ">
+                            </div>
+                            <div class="col-md-1 col-1">
+                                <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center bg-light h-100" id="divstart">
+                    <i class="fa fa-comments mt-5" style="font-size: 200px;" aria-hidden="true"></i>
+                    <h2 class="mt-3">Select your friend & Start Chating</h2>
+                    <a href="#" onclick="showFlist()" class="d-md-none">New chat</a>
+                </div>
+            </div>
         </div>
 
     </div>
+
     <script src="app.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

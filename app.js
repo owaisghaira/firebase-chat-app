@@ -15,7 +15,7 @@
 
 // }
 
-// #sign in thorough input box // 
+// //#sign in thorough input box
 // var user;
 // let username = ()=>{
 // var inner1 = document.getElementById("username1").value
@@ -33,65 +33,81 @@
 // console.log(user)
 
 // }
-const fbLogin = ()=>{
-    var provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-    .then(function(result) {
-        var token = result.credential.accessToken;
-        var user = result.user;
-        console.log("user==>",user.displayName)
-        // ...
-      }).catch(function(error) {
-       console.log("error==>",error.message)
-      });
+// const fbLogin = ()=>{
+//     var provider = new firebase.auth.FacebookAuthProvider();
+//     firebase.auth().signInWithPopup(provider)
+//     .then(function(result) {
+//         var token = result.credential.accessToken;
+//         var user = result.user;
+//         console.log("user==>",user.displayName)
+//         // ...
+//       }).catch(function(error) {
+//        console.log("error==>",error.message)
+//       });
 
-}
-const fbOut = ()=>{
-    firebase.auth().signOut()
-    .then(function() {
-        alert('Sign-out successful.')
-      }).catch(function(error) {
+// }
+// const fbOut = ()=>{
+//     firebase.auth().signOut()
+//     .then(function() {
+//         alert('Sign-out successful.')
+//       }).catch(function(error) {
         
-      });
+//       });
+// }
+// var userdata = 'user2'
+// firebase.database().ref("sms").on('child_added', function (data) {
+//     // console.log(data.val().value)
+//     var cheekUser = data.val().user
+//     if (cheekUser === "user1") {
+//         // console.log(cheekUser)
+//         var spn = document.createElement("span")
+//         var li = document.createElement("li")
+//         var text = document.createTextNode(data.val().value)
+//         spn.appendChild(text)
+//         spn.setAttribute("class", "hello")
+//         li.setAttribute("class", "left")
+//         li.appendChild(spn)
+//         render.appendChild(li)
+//     }
+//     else {
+//         var spn = document.createElement("span")
+//         var li = document.createElement("li")
+//         var text = document.createTextNode(data.val().value)
+//         spn.appendChild(text)
+//         spn.setAttribute("class", "hello")
+//         li.setAttribute("class", "right")
+//         li.appendChild(spn)
+//         render.appendChild(li)
+//     }
+// })
+
+
+
+// let show = () => {
+//     var item = document.getElementById("msg");
+//     //     var render = document.getElementById("render");
+//     var key = firebase.database().ref().push().key
+//     var msg = {
+//         key: key,
+//         user: userdata,
+//         value: item.value
+//     }
+//     firebase.database().ref('sms').child(key).set(msg)
+//     item.value = "";
+// }
+
+
+let startChat = id =>{
+    document.getElementById("start").removeAttribute("style");
+    document.getElementById("divstart").setAttribute("style","display:none")
+    hideFlist();
 }
-var userdata = 'user2'
-firebase.database().ref("sms").on('child_added', function (data) {
-    // console.log(data.val().value)
-    var cheekUser = data.val().user
-    if (cheekUser === "user1") {
-        // console.log(cheekUser)
-        var spn = document.createElement("span")
-        var li = document.createElement("li")
-        var text = document.createTextNode(data.val().value)
-        spn.appendChild(text)
-        spn.setAttribute("class", "hello")
-        li.setAttribute("class", "left")
-        li.appendChild(spn)
-        render.appendChild(li)
-    }
-    else {
-        var spn = document.createElement("span")
-        var li = document.createElement("li")
-        var text = document.createTextNode(data.val().value)
-        spn.appendChild(text)
-        spn.setAttribute("class", "hello")
-        li.setAttribute("class", "right")
-        li.appendChild(spn)
-        render.appendChild(li)
-    }
-})
 
-
-
-let show = () => {
-    var item = document.getElementById("msg");
-    //     var render = document.getElementById("render");
-    var key = firebase.database().ref().push().key
-    var msg = {
-        key: key,
-        user: userdata,
-        value: item.value
-    }
-    firebase.database().ref('sms').child(key).set(msg)
-    item.value = "";
+function showFlist(){
+    document.getElementById("side-1").classList.remove("d-none","d-md-block");
+    document.getElementById("side-2").classList.add("d-none");
+}   
+function hideFlist(){
+    document.getElementById("side-1").classList.add("d-none","d-md-block");
+    document.getElementById("side-2").classList.remove("d-none");
 }
