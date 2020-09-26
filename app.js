@@ -51,7 +51,7 @@
 //     .then(function() {
 //         alert('Sign-out successful.')
 //       }).catch(function(error) {
-        
+
 //       });
 // }
 // var userdata = 'user2'
@@ -97,17 +97,40 @@
 // }
 
 
-let startChat = id =>{
+let startChat = id => {
     document.getElementById("start").removeAttribute("style");
-    document.getElementById("divstart").setAttribute("style","display:none")
+    document.getElementById("divstart").setAttribute("style", "display:none")
     hideFlist();
 }
 
-function showFlist(){
-    document.getElementById("side-1").classList.remove("d-none","d-md-block");
+function showFlist() {
+    document.getElementById("side-1").classList.remove("d-none", "d-md-block");
     document.getElementById("side-2").classList.add("d-none");
-}   
-function hideFlist(){
-    document.getElementById("side-1").classList.add("d-none","d-md-block");
+}
+function hideFlist() {
+    document.getElementById("side-1").classList.add("d-none", "d-md-block");
     document.getElementById("side-2").classList.remove("d-none");
+}
+
+let Onkeydown = () => {
+    document.addEventListener("keydown", key => {
+        if (key.which == 13) {
+            sendmessage()
+        }
+    })
+}
+function sendmessage(){
+    var message = ` <div class="row justify-content-end"> 
+                        <div class="col-md-5 col-6 float-right">
+                            <p class="sender  float-right">
+                            ${document.getElementById("txtmessage").value} 
+                            <span class="time">1:00</span>  </p>
+                        </div>
+                        <div class="col-md-1 col-1">
+                            <img src="images/profile.png" class="chat-pic rounded-circle" alt="">
+                        </div>
+                    </div>`;
+    document.getElementById('message').innerHTML += message;
+    document.getElementById("txtmessage").value = '';
+    document.getElementById("txtmessage").focus();
 }

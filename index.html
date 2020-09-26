@@ -74,8 +74,11 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- ////////////////////////////// chat pannel  ////////////////////////// -->
+
             <div class="col-md-8 col-12 pl-0 px-0 " id="side-2">
-                <div class="card h-100" style="display: none;" id="start">
+                <div class="card" style="display: none;" id="start">
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-1 col-1 d-md-none mt-2">
@@ -90,14 +93,31 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body"></div>
+                    <div class="card-body" id="message">
+                        <div class="row">
+                            <div class="col-md-1 col-1">
+                                <img src="images/profile.png" class="chat-pic rounded-circle" alt="">
+                            </div>
+                            <div class="col-md-5 col-6">
+                                <p class="recieve">This is some text <span class="time">1:00</span>  </p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end"> 
+                            <div class="col-md-5 col-6 float-right">
+                                <p class="sender  float-right">This is some text <span class="time">1:00</span>  </p>
+                            </div>
+                            <div class="col-md-1 col-1">
+                                <img src="images/profile.png" class="chat-pic rounded-circle" alt="">
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-footer">
                         <div class="row">
                             <div class="col-md-1 col-1">
                                 <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
                             </div>
                             <div class="col-md-10 col-10">
-                                <input type="text" placeholder="type here..." class="form-control form-rounded ">
+                                <input id="txtmessage" onclick="Onkeydown()" type="text" placeholder="type here..." class="form-control form-rounded ">
                             </div>
                             <div class="col-md-1 col-1">
                                 <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>

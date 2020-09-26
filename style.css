@@ -30,3 +30,33 @@ body{
 .under-name{
   font-size: 12px;
 }
+.chat-pic{
+  width: 30px;
+  height: 30px;
+}
+.recieve{
+  background-color: lightgray;
+  border-radius: 2rem;
+  padding: 5px 10px;
+  display: inline-block;
+}
+.time{
+  font-size: 12px;
+  color: #9ca1a3;
+  margin-top: 3%;
+  margin-left: 5px;
+}
+.sender{
+  background-color: whitesmoke;
+  border-radius: 2rem;
+  padding: 5px 10px;
+  display: inline-block;
+}
+.card{
+  height: 94vh;
+}
+
+#message{
+  overflow-y:scroll;
+  overflow-x :hidden;
+}
