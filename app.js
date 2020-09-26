@@ -95,8 +95,31 @@
 //     firebase.database().ref('sms').child(key).set(msg)
 //     item.value = "";
 // }
+///////////////// /////////////////////////////////////////
 
+const signIn = () => {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    firebase.auth().signInWithPopup(provider)
+        .then(function (result) {
+            var token = result.credential.accessToken;
+            var user = result.user;
+            console.log("user==>", user.displayName)
+        })
+        .catch(function (error) {
+            console.log("error==>", error.message)
+        });
 
+}
+const signOut = () => {
+    firebase.auth().signOut()
+        .then(function () {
+            alert('Sign-out successful.')
+        }).catch(function (error) {
+
+        });
+}
+
+/////////////////////////////////////////////////////////
 let startChat = id => {
     document.getElementById("start").removeAttribute("style");
     document.getElementById("divstart").setAttribute("style", "display:none")
@@ -119,7 +142,7 @@ let Onkeydown = () => {
         }
     })
 }
-function sendmessage(){
+function sendmessage() {
     var message = ` <div class="row justify-content-end"> 
                         <div class="col-md-5 col-6 float-right">
                             <p class="sender  float-right">
