@@ -100,24 +100,39 @@
 const signIn = () => {
     var provider = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(provider)
-        .then(function (result) {
-            var token = result.credential.accessToken;
-            var user = result.user;
-            console.log("user==>", user.displayName)
-        })
-        .catch(function (error) {
-            console.log("error==>", error.message)
-        });
+        // .then(function (result) {
+        //     var token = result.credential.accessToken;
+        //     var user = result.user;
+        //     document.getElementById('profile-img').src = user.photoURL;
+        //     document.getElementById('profile-img').title = user.displayName;
+        //     console.log("user==>", user.photoURL)
+        // })
+        // .catch(function (error) {
+        //     console.log("error==>", error.message)
+        // });
 
 }
-const signOut = () => {
-    firebase.auth().signOut()
-        .then(function () {
-            alert('Sign-out successful.')
-        }).catch(function (error) {
+let signOut = () => {
+    firebase.auth().signOut();
+        // .then(function () {
+        //     alert('Sign-out successful.')
+        // }).catch(function (error) {
 
-        });
+        // });
 }
+
+let onfirebasestatechange = ()=>{
+    firebase.auth().onAuthStateChanged(onStatechange);
+}
+let onStatechange = (user)=>{
+    if (user){
+        // console.log(firebase.auth().currentUser.displayName,firebase.auth().currentUser.photoURL)
+            document.getElementById('profile-img').src = user.photoURL;
+            document.getElementById('profile-img').title = user.displayName;
+    }
+}
+
+onfirebasestatechange()
 
 /////////////////////////////////////////////////////////
 let startChat = id => {
