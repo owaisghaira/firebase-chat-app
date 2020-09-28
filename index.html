@@ -39,12 +39,24 @@
                 <div class="card h-100">
                     <div class="card-header">
                         <div class="row ">
+                            <div class="col-md-1 col-1 d-md-none">
+                                <i class="fa fa-chevron-left mt-3 d-md-none " style="cursor: pointer;" onclick="hideFlist()" aria-hidden="true"></i>
+
+                            </div>
                             <div class="col-md-10 col-10">
                                 <img class="profile-pic rounded-circle" id="profile-img" src="images/profile.png" alt="">
                             </div>
-                            <div class="col-md-2 col-2">
-                                <i class="fa fa-chevron-left mt-3 d-md-none " style="cursor: pointer;" onclick="hideFlist()" aria-hidden="true"></i>
-
+                            <div class="col-md-1 col-1">
+                                <div class="dropleft mt-2">
+                                    <span class="" data-toggle="dropdown"> 
+                                        <i class="fa fa-ellipsis-v icon" aria-hidden="true"></i>
+                                    </span> 
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="#">New Chat</a>
+                                      <a class="dropdown-item" id="lnksignin" onclick="signIn()" style="display: none;" href="#">Sign In</a>
+                                      <a class="dropdown-item" id="lnksignout" onclick="signOut()" style="display: none;" href="#">Sign Out</a>
+                                  </div>
+                                </div>
                             </div>
                         </div>
                     </div>
