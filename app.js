@@ -126,31 +126,57 @@ let onfirebasestatechange = ()=>{
 }
 let onStatechange = (user)=>{
     if (user){
-        // console.log(firebase.auth().currentUser.displayName,firebase.auth().currentUser.photoURL)
+        console.log(firebase.auth().currentUser.displayName,firebase.auth().currentUser.photoURL)
         var userprofile = {
             name: user.displayName,
             email:user.email,
             photoURL: user.photoURL
         }
-        var flag = false;
-        firebase.database().ref('users').on('child_added',data=>{
-            var user = data.val()
-            if(user.email === userprofile.email){
-                flag = true;
-            }
+        console.log(user.displayName);
+        var flag = true;
+         var promise = new Promise((resolve,reject)=>{
+           
+            firebase.database().ref('users').on('child_added',data=>{
+              if(data.val()){
+                resolve(data.val())
+              }
+              else{
+                  reject("not")
+              }
+            })
         })
-        if (flag == false){
-        var key = firebase.database().ref('users').push().key;
-        firebase.database().ref('users/'+key).set(userprofile);
-        }
-        else{
-            
-        }
-            document.getElementById('profile-img').src = user.photoURL;
-            document.getElementById('profile-img').title = user.displayName;
-
-            document.getElementById('lnksignin').style = 'display:none';
-            document.getElementById('lnksignout').style = '';
+        promise.then(data=>{
+            console.log(data.email)
+        }).catch(error=>{
+            console.log(error)
+        })
+        // firebase.database().ref('users').on('child_added',user=>{
+        //     // user.map(function(data){
+        //         var usr = data.val()
+        //         console.log(usr)
+        //         if(usr.email === userprofile.email){
+        //             flag = true;
+        //         }
+            // })
+            if (flag === true){
+                var key = firebase.database().ref('users').push().key;
+                firebase.database().ref('users/'+key).set(userprofile);
+                    document.getElementById('profile-img').src = user.photoURL;
+                    document.getElementById('profile-img').title = user.displayName;
+        
+                    document.getElementById('lnksignin').style = 'display:none';
+                    document.getElementById('lnksignout').style = '';        
+            }
+            else{
+                document.getElementById('profile-img').src = firebase.auth().currentUser.photoURL;
+                document.getElementById('profile-img').title = user.displayName;
+    
+                document.getElementById('lnksignin').style = 'display:none';
+                document.getElementById('lnksignout').style = '';    
+            }
+        // })
+       
+       
     }
     else{
         document.getElementById('profile-img').src = "images/profile.png";
