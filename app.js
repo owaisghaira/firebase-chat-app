@@ -95,22 +95,85 @@
 //     firebase.database().ref('sms').child(key).set(msg)
 //     item.value = "";
 // }
+
 ///////////////// /////////////////////////////////////////
 
-const signIn = () => {
-    var provider = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(provider)
-    // .then(function (result) {
-    //     var token = result.credential.accessToken;
-    //     var user = result.user;
-    //     document.getElementById('profile-img').src = user.photoURL;
-    //     document.getElementById('profile-img').title = user.displayName;
-    //     console.log("user==>", user.photoURL)
-    // })
-    // .catch(function (error) {
-    //     console.log("error==>", error.message)
-    // });
+function populatefrndlst(){
+    // document.getElementById('lstfriend').innerHTML = ` <div class="d-flex justify-content-center">
+    //                                                       <div class="spinner-border" role="status">
+    //                                                       <li>
+    //                                                         <span class="sr-only">Loading...</span>
+    //                                                         </li>
+    //                                                    </div>
+    //                                                 </div>`
+    var db = firebase.database().ref("users");
+    var lst ;
+    db.on("value",function(users){
+        users.forEach(function(data){
+            var user = data.val();
+            if (user.email !== firebase.auth().currentUser.email){
+                lst += `<li class="list-group-item list-group-item-action" data-dismiss="modal" onclick="startChat('${data.key}','${data.name}','${data.photoURL}')">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="${user.photoURL}" class="profile-pic rounded-circle" alt="">
+                    </div>
+                    <div class="col-md-10">
+                        <div class="name">${user.name}</div>
+                    </div>
+                </div>
+            </li>`;
+            }
+         
+        })
+        document.getElementById('lstfriend').innerHTML = lst
+        console.log(lst)
+    })
+}
 
+var  currentUserkey = '';
+let startChat = (friendkey,friendname,friendphoto) => {
+    var friendList = {
+        firenId:friendkey,
+        userId : currentUserkey
+    }
+    var db = firebase.database().ref('friend_list')
+    var flag = false
+    db.on('value',function(users){
+        users.forEach(function(data){
+            var user = data.val()
+            if((user.friendId === friendList.friendId && user.userId === friendList.userId) ||(user.friendId === friendList.userId && user.userId === friendList.friendId)){
+                flag  = true
+            } 
+        })
+        if(flag === false){
+            firebase.database().ref('friend_list').push(friendList,function(error){
+                if(error) alert(error)
+                else{
+                   document.getElementById("start").removeAttribute("style");
+                   document.getElementById("divstart").setAttribute("style", "display:none")
+                   hideFlist();
+                }
+            })
+        }
+        else{
+            document.getElementById("start").removeAttribute("style");
+            document.getElementById("divstart").setAttribute("style", "display:none")
+            hideFlist();
+        }
+    })
+
+     
+   
+}
+
+const signIn = () => {
+    ///////////// fb login////////////////
+    // var provider = new firebase.auth.FacebookAuthProvider();
+    // firebase.auth().signInWithPopup(provider)
+  //////////////google login ///////////
+
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider);
 }
 let signOut = () => {
     firebase.auth().signOut();
@@ -126,53 +189,39 @@ let onfirebasestatechange = () => {
 }
 let onStatechange = (user) => {
     if (user) {
-        console.log(firebase.auth().currentUser.displayName, firebase.auth().currentUser.photoURL)
+       // console.log(firebase.auth().currentUser.displayName, firebase.auth().currentUser.photoURL)
         var userprofile = {
             name: user.displayName,
             email: user.email,
             photoURL: user.photoURL
         }
-        console.log(user.displayName);
-        var flag = false;
-
-
-        var promise = new Promise((resolve, reject) => {
-
-            firebase.database().ref('users').on('child_added', data => {
-
-                if (data.val()) {
-                    resolve(data.val())
+            var db = firebase.database().ref('users');
+            var flag = false;
+            db.on('value',function(users){
+                users.forEach(function(data){
+                    var user = data.val();
+                    console.log(data.key,userprofile.email)
+                    if(user.email === userprofile.email){
+                        currentUserkey = data.key
+                        // console.log(currentUserkey)
+                        flag = true;
+                    }
+                })
+                console.log(flag)
+                if (flag === false){
+                    firebase.database().ref('users').push(userprofile,callback)
                 }
-                else {
-                    reject("not")
+                else{
+                    document.getElementById('profile-img').src = firebase.auth().currentUser.photoURL;
+                    document.getElementById('profile-img').title = firebase.auth().currentUser.displayName;
+            
+                    document.getElementById('lnksignin').style = 'display:none';
+                    document.getElementById('lnksignout').style = '';   
                 }
             })
-        })
-        promise.then(users => {
+
           
-                console.log(user)
-                if (user.email === userprofile.email) {
-                    flag = true;
-                }
-        })
-            .catch(error => {
-                console.log(error)})
-        if (flag === true) {
-            var key = firebase.database().ref('users').push().key;
-            firebase.database().ref('users/' + key).set(userprofile);
-            document.getElementById('profile-img').src = user.photoURL;
-            document.getElementById('profile-img').title = user.displayName;
 
-            document.getElementById('lnksignin').style = 'display:none';
-            document.getElementById('lnksignout').style = '';
-        }
-        else {
-            document.getElementById('profile-img').src = firebase.auth().currentUser.photoURL;
-            document.getElementById('profile-img').title = user.displayName;
-
-            document.getElementById('lnksignin').style = 'display:none';
-            document.getElementById('lnksignout').style = '';
-        }
     }
     else {
         document.getElementById('profile-img').src = "images/profile.png";
@@ -180,17 +229,26 @@ let onStatechange = (user) => {
 
         document.getElementById('lnksignin').style = '';
         document.getElementById('lnksignout').style = 'display:none';
+        document.getElementById('lnknewchat').classList.add('disabled');
     }
+}
+function callback(error){
+    if(error){
+        alert(error)
+    }
+    else{
+        document.getElementById('profile-img').src = firebase.auth().currentUser.photoURL;
+        document.getElementById('profile-img').title = firebase.auth().currentUser.displayName;
+
+        document.getElementById('lnksignin').style = 'display:none';
+        document.getElementById('lnksignout').style = '';
+    }
+
 }
 
 onfirebasestatechange()
 
 /////////////////////////////////////////////////////////
-let startChat = id => {
-    document.getElementById("start").removeAttribute("style");
-    document.getElementById("divstart").setAttribute("style", "display:none")
-    hideFlist();
-}
 
 function showFlist() {
     document.getElementById("side-1").classList.remove("d-none", "d-md-block");
