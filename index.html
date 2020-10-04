@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHAT-APP</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <script src="https://www.gstatic.com/firebasejs/7.20.0/firebase-app.js"></script>
@@ -17,45 +18,66 @@
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         var firebaseConfig = {
-          apiKey: "AIzaSyAAaLXlD6r1Ow9MLUr6Sek2qbfepBueyVc",
-          authDomain: "chat-app-6b107.firebaseapp.com",
-          databaseURL: "https://chat-app-6b107.firebaseio.com",
-          projectId: "chat-app-6b107",
-          storageBucket: "chat-app-6b107.appspot.com",
-          messagingSenderId: "690301948656",
-          appId: "1:690301948656:web:ec8d6a9e7b0ddc7cf52835",
-          measurementId: "G-T0PSLGX8QR"
+            apiKey: "AIzaSyAAaLXlD6r1Ow9MLUr6Sek2qbfepBueyVc",
+            authDomain: "chat-app-6b107.firebaseapp.com",
+            databaseURL: "https://chat-app-6b107.firebaseio.com",
+            projectId: "chat-app-6b107",
+            storageBucket: "chat-app-6b107.appspot.com",
+            messagingSenderId: "690301948656",
+            appId: "1:690301948656:web:ec8d6a9e7b0ddc7cf52835",
+            measurementId: "G-T0PSLGX8QR"
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        // firebase.analytics();
-      </script>
+    // firebase.analytics();
+    </script>
 </head>
 
 <body>
     <div class="container bg-white chatbox rounded">
         <div class="row h-100">
-            <div class="col-md-4 px-0 d-none d-md-block" id="side-1" >
+            <div class="col-md-4 px-0 d-none d-md-block" id="side-1">
                 <div class="card h-100">
                     <div class="card-header">
                         <div class="row ">
                             <div class="col-md-1 col-1 d-md-none">
-                                <i class="fa fa-chevron-left mt-3 d-md-none " style="cursor: pointer;" onclick="hideFlist()" aria-hidden="true"></i>
+                                <i class="fa fa-chevron-left mt-3 d-md-none " style="cursor: pointer;"
+                                    onclick="hideFlist()" aria-hidden="true"></i>
 
                             </div>
                             <div class="col-md-10 col-10">
-                                <img class="profile-pic rounded-circle" id="profile-img" src="images/profile.png" alt="">
+                                <img class="profile-pic rounded-circle" id="profile-img" src="images/profile.png"
+                                    alt="">
                             </div>
                             <div class="col-md-1 col-1">
                                 <div class="dropleft mt-2">
-                                    <span class="" data-toggle="dropdown"> 
+                                    <span class="" data-toggle="dropdown">
                                         <i class="fa fa-ellipsis-v icon" aria-hidden="true"></i>
-                                    </span> 
+                                    </span>
                                     <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">New Chat</a>
-                                      <a class="dropdown-item" id="lnksignin" onclick="signIn()" style="display: none;" href="#">Sign In</a>
-                                      <a class="dropdown-item" id="lnksignout" onclick="signOut()" style="display: none;" href="#">Sign Out</a>
-                                  </div>
+                                        <a class="dropdown-item" data-toggle="modal" id="lnknewchat" onclick="populatefrndlst()"
+                                            data-target="#friendlist" href="#">New Chat</a>
+                                        <a class="dropdown-item" id="lnksignin" onclick="signIn()"
+                                            style="display: none;" href="#">Sign In</a>
+                                        <a class="dropdown-item" id="lnksignout" onclick="signOut()"
+                                            style="display: none;" href="#">Sign Out</a>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="friendlist">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Friend List</h5>
+                                                        <span class="close" data-dismiss="modal">&times;</span>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <ul class="list-group list-group-flush" id="lstfriend"></ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -94,14 +116,15 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-1 col-1 d-md-none mt-2">
-                                <i class="fa fa-list" aria-hidden="true" onclick="showFlist()" style="cursor: pointer;" ></i>
+                                <i class="fa fa-list" aria-hidden="true" onclick="showFlist()"
+                                    style="cursor: pointer;"></i>
                             </div>
                             <div class="col-md-2 col-2">
-                                <img class="profile-pic" src="images/profile.png" alt="">
+                                <img class="profile-pic rounded-circle" id="divpic" src="images/profile.png" alt="">
                             </div>
                             <div class="col-md-9 col-9">
-                                <div class="name">Any name</div>
-                                <div class="under-name">2/4/2020 </div>
+                                <div class="name" id="divChatname">Any name</div>
+                                <div class="under-name" id="divChatseen">2/4/2020 </div>
                             </div>
                         </div>
                     </div>
@@ -111,12 +134,12 @@
                                 <img src="images/profile.png" class="chat-pic rounded-circle" alt="">
                             </div>
                             <div class="col-md-5 col-6">
-                                <p class="recieve">This is some text <span class="time">1:00</span>  </p>
+                                <p class="recieve">This is some text <span class="time">1:00</span> </p>
                             </div>
                         </div>
-                        <div class="row justify-content-end"> 
+                        <div class="row justify-content-end">
                             <div class="col-md-5 col-6 float-right">
-                                <p class="sender  float-right">This is some text <span class="time">1:00</span>  </p>
+                                <p class="sender  float-right">This is some text <span class="time">1:00</span> </p>
                             </div>
                             <div class="col-md-1 col-1">
                                 <img src="images/profile.png" class="chat-pic rounded-circle" alt="">
@@ -129,7 +152,8 @@
                                 <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
                             </div>
                             <div class="col-md-10 col-10">
-                                <input id="txtmessage" onclick="Onkeydown()" type="text" placeholder="type here..." class="form-control form-rounded ">
+                                <input id="txtmessage" onclick="Onkeydown()" type="text" placeholder="type here..."
+                                    class="form-control form-rounded ">
                             </div>
                             <div class="col-md-1 col-1">
                                 <i class="fa fa-microphone fa-2x" aria-hidden="true"></i>
@@ -151,9 +175,15 @@
     </div>
 
     <script src="app.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
