@@ -82,29 +82,8 @@
                             </div>
                         </div>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action" onclick="startChat(1)">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img src="images/profile.png" class="profile-pic rounded-circle" alt="">
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="name">Any name</div>
-                                    <div class="under-name">this is some text</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <img src="images/profile.png" class="profile-pic rounded-circle" alt="">
-                                </div>
-                                <div class="col-md-10">
-                                    <div class="name">Any name</div>
-                                    <div class="under-name">this is some text</div>
-                                </div>
-                            </div>
-                        </li>
+                    <ul class="list-group list-group-flush" id="lstchat">
+                      
                     </ul>
                 </div>
             </div>
@@ -129,22 +108,7 @@
                         </div>
                     </div>
                     <div class="card-body" id="message">
-                        <div class="row">
-                            <div class="col-md-1 col-1">
-                                <img src="images/profile.png" class="chat-pic rounded-circle" alt="">
-                            </div>
-                            <div class="col-md-5 col-6">
-                                <p class="recieve">This is some text <span class="time">1:00</span> </p>
-                            </div>
-                        </div>
-                        <div class="row justify-content-end">
-                            <div class="col-md-5 col-6 float-right">
-                                <p class="sender  float-right">This is some text <span class="time">1:00</span> </p>
-                            </div>
-                            <div class="col-md-1 col-1">
-                                <img src="images/profile.png" class="chat-pic rounded-circle" alt="">
-                            </div>
-                        </div>
+                      
                     </div>
                     <div class="card-footer">
                         <div class="row">
@@ -152,7 +116,7 @@
                                 <i class="fa fa-smile-o fa-2x" aria-hidden="true"></i>
                             </div>
                             <div class="col-md-10 col-10">
-                                <input id="txtmessage" onclick="Onkeydown()" type="text" placeholder="type here..."
+                                <input id="txtmessage" type="text" placeholder="type here..."
                                     class="form-control form-rounded ">
                             </div>
                             <div class="col-md-1 col-1">
